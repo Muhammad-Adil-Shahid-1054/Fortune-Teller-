@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify
 from groq import Groq
 from dotenv import load_dotenv
 
-# 1. Load environment variables from the .env file
+# Load environment variables from the .env file
 load_dotenv()
 
-# 2. Retrieve API Key from .env
+# Retrieve API Key from .env
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = "llama-3.1-8b-instant"
 DEBUG_MODE = True
@@ -69,10 +69,10 @@ def get_fortune():
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": f"Name: {name}\nQuestion: {question}"}
             ],
-            temperature=0.9, 
+            temperature=0.9,
         )
 
-        fortune_text = completion.choices[0].message.content
+        fortune_text = completion.choices[0].message.content # here choices[0] means select the first best message that was generated
 
         # --- 5. RETURN JSON RESPONSE ---
         return jsonify({
