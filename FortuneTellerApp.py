@@ -42,7 +42,7 @@ def home():
 def get_fortune():
     #Check if request is JSON ---
     if not request.is_json:
-        return jsonify({"error": "Request must be valid JSON"}), 400
+        return jsonify({"error": "Reques    t must be valid JSON"}), 400
 
     data = request.get_json()
 
@@ -87,5 +87,6 @@ def get_fortune():
         return jsonify({"error": f"The crystal ball is cloudy (Internal Error): {str(e)}"}), 500
 
 if __name__ == '__main__':
-    print(f"Starting Magic Fortune Teller Server. Debug={DEBUG_MODE}")
-    app.run(debug=DEBUG_MODE)
+    # Use 0.0.0.0 to listen on all interfaces
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
